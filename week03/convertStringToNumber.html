@@ -1,0 +1,38 @@
+<! DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      "use strict"
+      function convertStringToNumber(str, x) {
+        let strs = str.split('.');
+        let integerstrs = strs[0];
+        let decimalstrs = strs[1];
+
+        let number = 0
+        for (let i = 0; i < integerstrs.length; i++) {
+           number *= x;
+           number += integerstrs[i].codePointAt(0) - '0'.codePointAt()
+        }
+        
+        let decimals = 0
+        let j = 0;
+        for (; j < decimalstrs.length; j++) {
+           decimals *= x;
+           decimals += decimalstrs[j].codePointAt(0) - '0'.codePointAt()
+        }
+
+        decimals = decimals * Math.pow(10, -j)
+
+        return number + decimals;
+      } 
+      
+      
+      console.info(convertStringToNumber("123123.123", 10));
+      
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

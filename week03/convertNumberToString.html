@@ -1,0 +1,63 @@
+<! DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">
+      "use strict"
+      
+      function getDecimals(number, x) {
+         let integer =  Math.floor(number);
+         if (integer === number) {
+            return 0;
+         }
+
+         let i=1;
+         for (; Math.floor(number) != number && number <= Number.MAX_SAFE_INTEGER; i++) {
+             number = number * x;
+         }
+         
+         return i - 1;
+      }
+
+      function convertNumberToString(number, x) {
+        let integer = Math.floor(number);
+        let decimalsLength = getDecimals(number, x);
+        
+        let intergetSers = [];
+        let integerStr = "";
+  
+        while(integer > 0) {
+          let remainder = integer % x;
+          integerStr = remainder + integerStr;
+          integer = (integer - remainder) / x;
+        }
+        
+        if (!decimalsLength) {
+          return integerStr;
+        }
+
+        let decimalsStr = ".";
+        let i = 1;
+        integer = Math.floor(number);
+ 
+        while(i <= decimalsLength) {
+           number *= x;
+           integer *= x;
+           let decimal = Math.floor(number)  - Math.floor(integer); 
+           integer += decimal;
+           decimalsStr += decimal;
+           i++
+        }
+        
+        return integerStr + decimalsStr;
+      } 
+      
+      console.info(convertNumberToString(0b1101, 2));
+      console.info(convertNumberToString(36.12, 10));
+      
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
